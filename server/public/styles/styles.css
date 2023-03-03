@@ -137,3 +137,15 @@ button {
 .github:hover {
     transform: rotate(360deg) scale(1.2);
 }
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#all-equations {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
