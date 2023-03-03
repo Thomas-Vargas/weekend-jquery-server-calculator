@@ -70,6 +70,12 @@ app.get('/equationResult', (req, res) => {
     res.send(equations[equations.length - 1]);
 });
 
+app.delete('/deleteAllEquations', (req,res) => {
+    console.log('Request to /deleteAllEquations');
+    equations = [];
+    res.sendStatus(200);
+})
+
 app.listen(PORT, () => {
     console.log ('Server is running on port', PORT)
 });

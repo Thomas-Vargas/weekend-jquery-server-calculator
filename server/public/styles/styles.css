@@ -138,14 +138,60 @@ button {
     transform: rotate(360deg) scale(1.2);
 }
 
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#all-equations {
+#all-equations-container {
+    margin-left: 20px;
+    border-radius: 6px;
+    height: 550px;
+    width: 300px;
+    border: 2px solid black;
+    background-color: var(--gray);
     margin-top: 20px;
     display: flex;
     flex-direction: column;
+}
+
+#all-equations-container h2 {
+    font-size: 28px;
+    text-align: center;
+    color: white;
+    margin-top: 5px;
+}
+
+#all-equations {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid black;
+    border-radius: 6px;
+    background-color: var(--light-gray);
+    margin: 10px;
+    height: 100%;
+}
+
+.equation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 5px;
+    width: 96%;
+    height: 40px;
+    border-radius: 6px;
+    font-size: 22px;
+    border: 2px solid black;
+    background-color: var(--gray);
+    color: white;
+}
+
+#delete-all-equations {
+    margin: 0px 10px 10px 10px;
+    font-size: 28px;
+    padding: 5px;
+    border: 2px solid black;
+    border-radius: 6px;
+    background-color: var(--clear);
+}
+
+#delete-all-equations:hover {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2) 0 0);
 }
