@@ -1,0 +1,138 @@
+:root {
+    --tan: #c69f74;
+    --light-tan: #dbccbc;
+    --light-gray: #ededf5;
+    --gray: #8d8d8d;
+    --olive-green: #979056;
+    --clear: #d29681;
+    --delete: #508593;
+    --footer: #383838;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+    background-color: var(--light-gray);
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    font-family: 'Lato', sans-serif;
+    /* footer support */
+    margin-bottom: 100px;
+}
+
+html {
+    /* footer support */
+    position: relative;
+    min-height: 100%;
+}
+
+a {
+    color: var(--footer);
+}
+
+a:hover {
+    color: #141414;
+}
+
+button {
+    border: none;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    outline: none;
+}
+
+.container {
+    border: 2px solid black;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: var(--gray);
+    width: 400px;
+    border-radius: 10px;
+}
+
+.btns-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+}
+
+.btn-big {
+    grid-column: span 2;
+}
+
+.btn {
+    padding: 20px;
+    border: 2px black solid;
+    border-radius: 5px;
+    background-color: var(--light-gray);
+    font-size: 20px;
+}
+
+.btn:hover {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2) 0 0);
+}
+
+.display {
+    padding: 10px 20px;
+    border: 2px black solid;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background-color: var(--light-gray);
+    text-align: right;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.display-last {
+    min-height: 32px;
+    font-size: 20px;
+}
+  
+.display-current {
+    min-height: 64px;
+    font-size: 40px;
+}
+
+.operator {
+    background-color: var(--olive-green);
+}
+
+#clear {
+    background-color: var(--clear);
+}
+
+#delete {
+    background-color: var(--delete);
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px;
+    font-size: 20px;
+    color: var(--footer);
+}
+
+.github {
+    font-size: 36px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.github:hover {
+    transform: rotate(360deg) scale(1.2);
+}
