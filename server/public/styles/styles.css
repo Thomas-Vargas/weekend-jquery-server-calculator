@@ -57,6 +57,7 @@ button {
     background-color: var(--gray);
     width: 400px;
     border-radius: 10px;
+    height: 550px;
 }
 
 .btns-grid {
