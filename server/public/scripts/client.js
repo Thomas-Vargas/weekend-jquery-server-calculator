@@ -12,6 +12,7 @@ function onReady() {
 let firstOperand = '';
 let secondOperand = '';
 let operator = '';
+
 let currentEquation = '';
 let lastEquation = '';
 
@@ -45,27 +46,28 @@ function clearAll() {
 
 function getBtnNumber() {
     //console.log($(this).text());
-    let num = $(this).text()
+    let num = $(this).text();
     if (operator.length === 0) {
-        firstOperand += num;
+        firstOperand += num; 
         currentEquation += num;
         $('#currentOperationScreen').text(currentEquation);
     }
     else {
         secondOperand+= num;
-        currentEquation += ` ${secondOperand}`
+        currentEquation += num;
         $('#currentOperationScreen').text(currentEquation);
     }
     console.log('First operand:',firstOperand);
     console.log('Second operand:', secondOperand);
     console.log('Operator', operator);
-
+    
+    console.log('current equation:', currentEquation);
 }
 
 function getBtnOperator() {
     if(operator.length === 0) {
         operator = $(this).text();
-        currentEquation += ` ${operator}`
+        currentEquation += ` ${operator} `
         $('#currentOperationScreen').text(currentEquation);
     }
 }
@@ -117,6 +119,7 @@ function renderResult(equation) {
 }
 
 function renderAllEquations(equations) {
+    $('#all-equations').empty();
     for(let i = 0; i < equations.length; i++) {
         $('#all-equations').append(`
             <li>${equations[i].firstOperand} ${equations[i].operator} ${equations[i].secondOperand} = ${equations[i].solution}</li>
