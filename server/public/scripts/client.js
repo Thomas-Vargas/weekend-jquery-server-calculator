@@ -15,19 +15,22 @@ let operator = '';
 let currentEquation = '';
 let lastEquation = '';
 
+
 function runCalculation() {
-    lastEquation = currentEquation;
-    currentEquation = '';
-    $('#lastOperationScreen').text(lastEquation);
-
-    let equationObj = {
-        firstOperand: Number(firstOperand),
-        secondOperand: Number(secondOperand),
-        operator
-    }   
-
-    addNewEquation(equationObj);
-    clearAll()
+    if(firstOperand && secondOperand && operator) {
+        lastEquation = currentEquation;
+        currentEquation = '';
+        $('#lastOperationScreen').text(lastEquation);
+    
+        let equationObj = {
+            firstOperand: Number(firstOperand),
+            secondOperand: Number(secondOperand),
+            operator
+        }   
+    
+        addNewEquation(equationObj);
+        clearAll()
+    }
 }
 
 function clearAll() {
@@ -74,9 +77,50 @@ function addNewEquation(equation){
         data: equation
     }).then(function(response) {
         console.log('post request success (POST to /)');
-        console.log(response);
+        //console.log(response);
+        getAllEquations();
+        getEquationResult();
     }).catch(function(response) {
         alert('Request failed');
     })
+}
+
+function getEquationResult() {
+    $.ajax({
+        method: 'GET',
+        url: '/equationResult',
+    }).then(function(response) {
+        console.log('Success', response);
+        renderResult(response);
+    }).catch(function(response) {
+        console.log(response);
+        alert('Request failed!');
+    });
+}
+
+function getAllEquations() {
+    $.ajax({
+        method: 'GET',
+        url: '/equations',
+    }).then(function(response) {
+        console.log('Success', response);
+        renderAllEquations(response)
+    }).catch(function(response) {
+        console.log(response);
+        alert('Request failed!');
+    });
+}
+
+function renderResult(equation) {
+    console.log('Most recent equation solution', equation.solution);
+    $('#currentOperationScreen').text(`${equation.solution}`);
+}
+
+function renderAllEquations(equations) {
+    for(let i = 0; i < equations.length; i++) {
+        $('#all-equations').append(`
+            <li>${equations[i].firstOperand} ${equations[i].operator} ${equations[i].secondOperand} = ${equations[i].solution}</li>
+        `);
+    }
 }
 
