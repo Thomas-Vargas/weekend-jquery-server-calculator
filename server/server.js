@@ -11,6 +11,7 @@ app.use(express.static('server/public'));
 
 let equations = [];
 
+// Server side logic for equations
 function addition(num1, num2) {
     let result = num1 + num2;
     return Math.round(result * 10) / 10;
