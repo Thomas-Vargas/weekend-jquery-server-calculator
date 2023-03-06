@@ -9,28 +9,10 @@ app.use(bodyParser.urlencoded({extended:true}));
 // Serve up static files (HTML, CSS, Client JS)
 app.use(express.static('server/public'));
 
-let equations = [];
+let equations = require('./modules/equations.js');
 
 // Server side logic for equations
-function addition(num1, num2) {
-    let result = num1 + num2;
-    return Math.round(result * 10) / 10;
-}
-
-function subtraction(num1, num2) {
-    let result = num1 - num2;
-    return Math.round(result * 10) / 10;
-}
-
-function division(num1, num2) {
-    let result = num1 / num2;
-    return Math.round(result * 10) / 10;
-}
-
-function multiplication(num1, num2) {
-    let result = num1 * num2;
-    return Math.round(result * 10) / 10;
-}
+let math = require('./modules/math.js');
 
 
 app.post('/', (req, res) => {
@@ -43,16 +25,16 @@ app.post('/', (req, res) => {
 
     switch (newEquation.operator) {
         case '+': 
-            newEquation.solution = addition(newEquation.firstOperand, newEquation.secondOperand);
+            newEquation.solution = math.addition(newEquation.firstOperand, newEquation.secondOperand);
             break;
         case '-':
-            newEquation.solution = subtraction(newEquation.firstOperand, newEquation.secondOperand);
+            newEquation.solution = math.subtraction(newEquation.firstOperand, newEquation.secondOperand);
             break;
         case '÷':
-            newEquation.solution = division(newEquation.firstOperand, newEquation.secondOperand);
+            newEquation.solution = math.division(newEquation.firstOperand, newEquation.secondOperand);
             break;
         case 'x':
-            newEquation.solution = multiplication(newEquation.firstOperand, newEquation.secondOperand);
+            newEquation.solution = math.multiplication(newEquation.firstOperand, newEquation.secondOperand);
             break;
     }
 
