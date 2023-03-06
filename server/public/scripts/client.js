@@ -7,9 +7,11 @@ function onReady() {
     $('.operator').on('click', getBtnOperator);
     $('#equals-btn').on('click', runCalculation);
     $('#clear').on('click', clearAll);
-    $('#delete-all-equations').on('click', deleteAllEquations);
-    $('#delete').on('click', deleteDigit);
+    $('#delete-all-equations').on('mousedown', deleteAllEquations);
+    $('#delete').on('mousedown', deleteDigit);
     $('#all-equations-container').on('click', '.equation', runPastEquation);
+    
+    $(document).on('keyup', keyboardInput);
 
     getAllEquations();
 }
@@ -20,6 +22,43 @@ let secondOperand = '';
 let operator = '';
 let currentEquation = '';
 let lastEquation = '';
+
+// Allows user to use keyboard for inputs
+function keyboardInput(e) {
+    // Store key pressed
+    let key = e.key;
+
+    //Handles number keys
+    if (key >= 0 && key <= 9) {
+        //console.log(key)
+        currentEquation += key;
+        $('#currentOperationScreen').text(currentEquation);
+    }
+
+    // Handles operators
+    if ((key === '+' || key === '-' || key === '/' || key === 'x' ) && operator.length === 0) {
+        // Converts keypress
+        if (key === '/') {
+            key = '÷';
+        }
+        //console.log(key);
+        operator = key;
+        currentEquation += ` ${operator} `;
+        $('#currentOperationScreen').text(currentEquation);
+    }
+
+    // Allows user to run equation with enter
+    if (key === 'Enter') {
+        runCalculation();
+    }
+
+    // Allows user to delete digit with backspace
+    if (key === 'Backspace') {
+        deleteDigit();
+    }
+
+    // console.log(key);
+} 
 
 // Allows user to run past equations in history with var\
 function runPastEquation() {
@@ -37,14 +76,14 @@ function deleteDigit() {
         // Clear value stored in operator var
     if (thingToDelete === '+' || thingToDelete === '-' || thingToDelete === 'x' || thingToDelete === '÷') {
         currentEquation = currentEquation.slice(0, -2);
-        operator = ''
+        operator = '';
     };
 
      // If it's an empty space, remove it and the character before it. 
         // If the previous character is an operator, clear the value stored in operator var.
     if (thingToDelete === ' ') {
         currentEquation = currentEquation.slice(0, -2);
-        operator = ''
+        operator = '';
     }
 
     // Else remove the first chara
@@ -110,7 +149,7 @@ function getBtnNumber() {
 function getBtnOperator() {
     if(operator.length === 0) {
         operator = $(this).text();
-        currentEquation += ` ${operator} `
+        currentEquation += ` ${operator} `;
         $('#currentOperationScreen').text(currentEquation);
     }
 }
@@ -150,7 +189,7 @@ function getAllEquations() {
         url: '/equations',
     }).then(function(response) {
         console.log('Success', response);
-        renderAllEquations(response)
+        renderAllEquations(response);
     }).catch(function(response) {
         console.log(response);
         alert('Request failed!');
@@ -162,8 +201,9 @@ function deleteAllEquations() {
         method: 'DELETE',
         url: '/deleteALLEquations'
     }).then(function(response) {
-        console.log('post request success (POST to /deleteEquations)');
+        console.log('DELETE request success (DELETE to /deleteEquations)');
         getAllEquations();
+        //clearAll();
     }).catch(function(response) {
         alert('Request failed');
     })
