@@ -9,8 +9,7 @@ function onReady() {
     $('#clear').on('click', clearAll);
     $('#delete-all-equations').on('mousedown', deleteAllEquations);
     $('#delete').on('mousedown', deleteDigit);
-    $('#all-equations-container').on('click', '.equation', runPastEquation);
-    
+    $('#all-equations-container').on('click', '.equation', runPastEquation); 
     $(document).on('keyup', keyboardInput);
 
     getAllEquations();
@@ -35,6 +34,7 @@ function keyboardInput(e) {
         $('#currentOperationScreen').text(currentEquation);
     }
 
+    console.log('operator before operator updates via keyboard', operator);
     // Handles operators
     if ((key === '+' || key === '-' || key === '/' || key === 'x' ) && operator.length === 0) {
         // Converts keypress
@@ -115,6 +115,10 @@ function runCalculation() {
     
         addNewEquation(equationObj);
         clearAll()
+    }
+    else {
+        //stops operator from being undefined if operator not present
+        operator = '';
     }
 }
 
